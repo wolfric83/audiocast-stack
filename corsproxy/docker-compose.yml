@@ -1,0 +1,14 @@
+services:
+  eo-proxy:
+    image: node:25-alpine
+    container_name: eo-proxy
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "8787:8787"
+    environment:
+      - PORT=8787
+      - UPSTREAM_URL=https://2026.everythingopen.au/schedule/conference.json
+    command: sh -lc "npm ci --omit=dev && node proxy.js"
+    restart: unless-stopped

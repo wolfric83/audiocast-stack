@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  icecast:
+    image: libretime/icecast:latest
+    container_name: icecast
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./conf/icecast/icecast.xml:/etc/icecast.xml:ro
+      - ./web:/usr/share/icecast/web/liquid:ro
+    restart: unless-stopped
+    networks:
+      - streaming
+
+  liquidsoap:
+    image: savonet/liquidsoap:v2.4.1
+    container_name: liquidsoap
+    volumes:
+      - ./conf/liquidsoap/radio.liq:/etc/liquidsoap/radio.liq:ro
+      - ./music:/music:ro
+      - ./web:/liquidweb
+    command: liquidsoap /etc/liquidsoap/radio.liq
+    restart: unless-stopped
+    depends_on:
+      - icecast
+    networks:
+      - streaming
+
+  eo-proxy:
+    image: node:25-alpine
+    container_name: eo-proxy
+    working_dir: /app 
+    volumes:
+      - ./corsproxy:/app
+    ports:
+      - "8787:8787"
+    environment:
+      - PORT=8787
+      - UPSTREAM_URL=https://2026.everythingopen.au/schedule/conference.json
+    command: sh -lc "npm ci --omit=dev && node proxy.js"
+    restart: unless-stopped
+
+
+networks:
+  streaming:
+    driver: bridge

@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1920, initial-scale=1.0" />
+  <title>Everything Open - Next Session (This Room)</title>
+
+  <!-- Branding fonts: Montserrat Light (headings), Source Sans Pro (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/eo.css">
+</head>
+<body>
+  <div class="stage" role="presentation" aria-label="Everything Open – Next Session view">
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="logo-left">
+        <img class="logo" src="assets/eo2026.svg" alt="Everything Open 2026 logo" />
+      </div>
+
+      <div class="header-title" id="header-room-title">
+        Up Next - This Room
+      </div>
+
+      <div class="logo-right">
+        <img class="logo" src="assets/la_logo.svg" alt="Linux Australia logo" />
+      </div>
+    </header>
+
+    <!-- Middle content -->
+    <main>
+      <section class="session-card" aria-labelledby="next-label">
+        <div class="session-header">
+          <span id="next-label" class="label">Next Session</span>
+          <span class="room" id="session-room">This Room</span>
+        </div>
+
+        <!-- Dynamic title -->
+        <h1 class="session-title" id="session-title">Loading…</h1>
+
+        <div class="session-meta">
+          <div class="meta-item">
+            <span class="meta-label">Time</span>
+            <span class="meta-value" id="session-time">—</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Speaker</span>
+            <span class="meta-value" id="session-speaker">—</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Track</span>
+            <span class="meta-value" id="session-track">—</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Location</span>
+            <span class="meta-value" id="session-location">—</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Decorative divider above lower thirds -->
+    <div class="divider" aria-hidden="true"></div>
+
+    <!-- Lower thirds: left sponsor carousel, right reserved -->
+    <aside class="lower-thirds" aria-label="Lower thirds">
+      <div class="lt-wrap">
+        <!-- LEFT: Sponsors Carousel -->
+        <div class="lt-left">
+          <div class="sponsor-carousel" aria-label="Sponsors">
+            <div class="sponsor-frame">
+              <!-- Logo box with solid white background -->
+              <div class="logo-box" style="--ws: 0%;">
+                <img class="sponsor-logo" alt="" />
+              </div>
+              <!-- Text row -->
+              <div class="sponsor-text">
+                <span class="sponsor-name"></span>
+                <span class="sponsor-level-badge"></span>
+              </div>
+            </div>
+            <!-- Progress dots -->
+            <div class="sponsor-dots" role="tablist" aria-label="Sponsor navigation"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT: reserved space (intentionally blank) -->
+        <div class="lt-right">
+          <!-- Reserved for announcements / captions / additional content -->
+        </div>
+      </div>
+    </aside>
+  </div>
+  
+<script src="js/eo-utils.js" defer></script>
+<script src="js/eo-sponsors.js" defer></script>
+<script src="js/eo-schedule.js" defer></script>
+
+</body>
+</html>
