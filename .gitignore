@@ -71,3 +71,5 @@ secrets/
 # =========================
 music/*
 !music/.gitkeep
+assets/*
+!assets/.gitkeep
