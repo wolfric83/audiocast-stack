@@ -14,9 +14,10 @@ Update radio.liq to match
 
 liquidsoap generates playlist, and now playing json
 
+Logo assets not saved with this repository, and must be wget/curl'd into the web/assets/ folder
 
 Playback Overlay (grabs now playing json):
-http://\<hostname>:8000/liquid/overlay.html
+http://\<hostname>:8000/liquid/nowplaying.html
 
 Schedule Overlay
 http://\<hostname>:8000/liquid/obs.html?src=http://\<hostname>:8787/conference.json&offsetDays=8
