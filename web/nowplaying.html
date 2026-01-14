@@ -38,28 +38,25 @@
     padding: 50px;
   }
 
-  #title  { font-size: 42px; font-weight: 700; }
+  #title  { font-size: 342x; font-weight: 700; }
   #artist { font-size: 30px; font-weight: 600; opacity: .95; margin-top: 6px; }
   #album  { font-size: 26px; font-weight: 500; opacity: .90; margin-top: 6px; }
   #track  { font-size: 18px; font-weight: 500; opacity: .85; margin-top: 4px; }
 </style>
-
 </head>
 <body>
   <div id="container">
     <div id="wrap">
-      <div id="title">Loading…</div>
+      <div id="title">Loading...</div>
       <div id="artist" style="display:none"></div>
       <div id="album"  style="display:none"></div>
       <div id="track"  style="display:none"></div>
     </div>
   </div>
 
-
 <script>
   function setLine(id, value) {
     const el = document.getElementById(id);
-    if (!el) return;
     const v = (value ?? "").toString().trim();
     if (v) {
       el.textContent = v;
@@ -71,11 +68,9 @@
   }
 
   function applyPosition() {
-    const container = document.getElementById("container");
-    if (!container) return;
-
     const params = new URLSearchParams(window.location.search);
     const pos = params.get("pos") || "bottom-left";
+    const container = document.getElementById("container");
 
     const allowed = [
       "top-left",
@@ -90,7 +85,7 @@
 
   async function refresh() {
     try {
-      const r = await fetch("/nowplaying.json", { cache: "no-store" });
+      const r = await fetch("nowplaying.json", { cache: "no-store" });
       if (!r.ok) throw new Error("HTTP " + r.status);
       const m = await r.json();
 
@@ -102,6 +97,7 @@
       setLine("track",
         m.tracknumber ? `Track ${m.tracknumber}` : ""
       );
+
     } catch {
       document.getElementById("title").textContent = "Metadata error";
       setLine("artist", "");
@@ -110,12 +106,14 @@
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    applyPosition();
-    refresh();
-    setInterval(refresh, 1000);
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  applyPosition();
+  refresh();
+  setInterval(refresh, 1000);
+});
 </script>
+
+
 
 </body>
 </html>
