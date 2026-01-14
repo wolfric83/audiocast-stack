@@ -146,7 +146,7 @@ function findNextSession(items, roomName, now) {
       }
 
       $title.textContent = next.name || 'Untitled session';
-      \$speaker.textContent = speakerText || '-';
+      $speaker.textContent = speakerText || '-';
 
       $time.textContent = (start && end) ? `${fmtHHMM(start)} - ${fmtHHMM(end)}` : '-';
       $track.textContent = next.section_name || '-';
