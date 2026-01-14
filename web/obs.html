@@ -26,7 +26,11 @@
       </div>
 
       <div class="logo-right">
+	                <div class="logo-box2" style="--ws: 0%;">
+
         <img class="logo" src="assets/la_logo.svg" alt="Linux Australia logo" />
+		              </div>
+
       </div>
     </header>
 
@@ -42,25 +46,27 @@
         <h1 class="session-title" id="session-title">Loading…</h1>
 
         <div class="session-meta">
+		
+		  <div class="meta-item">
+            <span class="meta-label">Speaker</span>
+            <span class="meta-value" id="session-speaker">—</span>
+          </div>
+
           <div class="meta-item">
             <span class="meta-label">Time</span>
             <span class="meta-value" id="session-time">—</span>
           </div>
 
           <div class="meta-item">
-            <span class="meta-label">Speaker</span>
-            <span class="meta-value" id="session-speaker">—</span>
-          </div>
-
-          <div class="meta-item">
-            <span class="meta-label">Track</span>
-            <span class="meta-value" id="session-track">—</span>
-          </div>
-
-          <div class="meta-item">
             <span class="meta-label">Location</span>
             <span class="meta-value" id="session-location">—</span>
           </div>
+		  
+          <div class="meta-item" style="display: none;">
+            <span class="meta-label">Track</span>
+            <span class="meta-value" id="session-track">—</span>
+          </div>
+		  
         </div>
       </section>
     </main>
