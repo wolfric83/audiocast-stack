@@ -46,19 +46,38 @@
     if (String(r).toLowerCase().trim() === target) return true;
     return roomsArr.some(x => String(x).toLowerCase().trim() === target);
   }
-  function findNextSession(items, roomName, now) {
-    const filtered = items.filter(it => !it.cancelled && sessionMatchesRoom(it, roomName));
-    filtered.sort((a, b) => {
-      const da = parseISO(a.start)?.getTime() || 0;
-      const db = parseISO(b.start)?.getTime() || 0;
-      return da - db;
-    });
-    for (const it of filtered) {
-      const ds = parseISO(it.start);
-      if (ds && ds.getTime() >= now.getTime()) return it;
-    }
-    return null;
+function findNextSession(items, roomName, now) {
+  const IGNORE_KINDS = new Set([
+    'morning tea',
+    'room changeover',
+    'lunch',
+    'afternoon tea',
+    'day end'
+  ]);
+
+  const filtered = items.filter(it => {
+    if (it.cancelled) return false;
+    if (!sessionMatchesRoom(it, roomName)) return false;
+
+    const kind = String(it.kind || '').toLowerCase().trim();
+    if (IGNORE_KINDS.has(kind)) return false;
+
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    const da = parseISO(a.start)?.getTime() || 0;
+    const db = parseISO(b.start)?.getTime() || 0;
+    return da - db;
+  });
+
+  for (const it of filtered) {
+    const ds = parseISO(it.start);
+    if (ds && ds.getTime() >= now.getTime()) return it;
   }
+
+  return null;
+}
 
   function setEmptyState(kind) {
     if (kind === 'no-data') {
@@ -69,12 +88,12 @@
       $title.textContent = 'Unable to load schedule.';
     }
 
-    $time.textContent = '—';
-    $speaker.textContent = '—';
-    $track.textContent = '—';
-    $location.textContent = roomParam || '—';
-    $room.textContent = roomParam || '—';
-    $headerRoomTitle.textContent = `Schedule — ${roomParam || 'This Room'}`;
+    $time.textContent = 'â€”';
+    $speaker.textContent = 'â€”';
+    $track.textContent = 'â€”';
+    $location.textContent = roomParam || 'â€”';
+    $room.textContent = roomParam || 'â€”';
+    $headerRoomTitle.textContent = `Schedule â€” ${roomParam || 'This Room'}`;
   }
 
   async function loadSchedule() {
@@ -95,7 +114,7 @@
       
       if (!isNaN(offsetDaysParam) && offsetDaysParam !== 0) {
         now.setDate(now.getDate() + offsetDaysParam);
-        console.log(`[EO] Time offset active: +${offsetDaysParam} days → ${now.toISOString()}`);
+        console.log(`[EO] Time offset active: +${offsetDaysParam} days â†’ ${now.toISOString()}`);
       }
 
       const next = findNextSession(items, roomParam, now);
@@ -113,11 +132,11 @@
           : '';
 
       $title.textContent = next.name || 'Untitled session';
-      $speaker.textContent = firstAuthor || '—';
-      $time.textContent = (start && end) ? `${fmtHHMM(start)} – ${fmtHHMM(end)}` : '—';
-      $track.textContent = next.section_name || '—';
+      $speaker.textContent = firstAuthor || 'â€”';
+      $time.textContent = (start && end) ? `${fmtHHMM(start)} â€“ ${fmtHHMM(end)}` : 'â€”';
+      $track.textContent = next.section_name || 'â€”';
 
-      const displayRoom = next.room || roomParam || '—';
+      const displayRoom = next.room || roomParam || 'â€”';
       $location.textContent = displayRoom;
       $room.textContent = displayRoom;
       $headerRoomTitle.textContent = `Up Next - ${displayRoom}`;
