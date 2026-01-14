@@ -126,13 +126,28 @@ function findNextSession(items, roomName, now) {
 
       const start = parseISO(next.start);
       const end = parseISO(next.end);
-      const firstAuthor =
-        Array.isArray(next.authors) && next.authors.length
-          ? (next.authors[0].name || '')
-          : '';
+
+      const authors = Array.isArray(next.authors) ? next.authors : [];
+      const authorNames = authors
+        .map(a => a?.name)
+        .filter(Boolean);
+      const speakerText = authorNames.join(', ');
+      // Set value
+
+      
+      // Find and update the meta label
+      const speakerLabelEl =
+        document.querySelector('#session-speaker')
+          ?.closest('.meta-item')
+          ?.querySelector('.meta-label');
+      
+      if (speakerLabelEl) {
+        speakerLabelEl.textContent = authorNames.length > 1 ? 'Speakers' : 'Speaker';
+      }
 
       $title.textContent = next.name || 'Untitled session';
-      $speaker.textContent = firstAuthor || '-';
+      \$speaker.textContent = speakerText || '-';
+
       $time.textContent = (start && end) ? `${fmtHHMM(start)} - ${fmtHHMM(end)}` : '-';
       $track.textContent = next.section_name || '-';
 
