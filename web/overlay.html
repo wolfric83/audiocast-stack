@@ -47,7 +47,7 @@
 <body>
   <div id="container">
     <div id="wrap">
-      <div id="title">Loading…</div>
+      <div id="title">Loadingâ€¦</div>
       <div id="artist" style="display:none"></div>
       <div id="album"  style="display:none"></div>
       <div id="track"  style="display:none"></div>
@@ -85,7 +85,7 @@
 
   async function refresh() {
     try {
-      const r = await fetch("/nowplaying.json", { cache: "no-store" });
+      const r = await fetch("nowplaying.json", { cache: "no-store" });
       if (!r.ok) throw new Error("HTTP " + r.status);
       const m = await r.json();
 
