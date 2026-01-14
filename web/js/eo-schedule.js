@@ -88,12 +88,12 @@ function findNextSession(items, roomName, now) {
       $title.textContent = 'Unable to load schedule.';
     }
 
-    $time.textContent = 'â€”';
-    $speaker.textContent = 'â€”';
-    $track.textContent = 'â€”';
-    $location.textContent = roomParam || 'â€”';
-    $room.textContent = roomParam || 'â€”';
-    $headerRoomTitle.textContent = `Schedule â€” ${roomParam || 'This Room'}`;
+    $time.textContent = '-';
+    $speaker.textContent = '-';
+    $track.textContent = '-';
+    $location.textContent = roomParam || '-';
+    $room.textContent = roomParam || '-';
+    $headerRoomTitle.textContent = `Schedule - ${roomParam || 'This Room'}`;
   }
 
   async function loadSchedule() {
@@ -132,11 +132,11 @@ function findNextSession(items, roomName, now) {
           : '';
 
       $title.textContent = next.name || 'Untitled session';
-      $speaker.textContent = firstAuthor || 'â€”';
-      $time.textContent = (start && end) ? `${fmtHHMM(start)} â€“ ${fmtHHMM(end)}` : 'â€”';
-      $track.textContent = next.section_name || 'â€”';
+      $speaker.textContent = firstAuthor || '-';
+      $time.textContent = (start && end) ? `${fmtHHMM(start)} - ${fmtHHMM(end)}` : '-';
+      $track.textContent = next.section_name || '-';
 
-      const displayRoom = next.room || roomParam || 'â€”';
+      const displayRoom = next.room || roomParam || '-';
       $location.textContent = displayRoom;
       $room.textContent = displayRoom;
       $headerRoomTitle.textContent = `Up Next - ${displayRoom}`;
